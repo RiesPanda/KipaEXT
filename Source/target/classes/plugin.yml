@@ -1,5 +1,5 @@
 name: KipaEXT
-version: ${project.version}
+version: 1.0
 main: tv.twitch.riespanda.kipaext.KipaEXT
 api-version: 1.16
 authors: [RiesPanda]
