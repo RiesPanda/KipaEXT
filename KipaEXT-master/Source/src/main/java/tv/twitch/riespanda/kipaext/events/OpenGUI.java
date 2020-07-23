@@ -38,97 +38,83 @@ public class OpenGUI implements Listener {
 
         // Calling variables
         Player player = event.getPlayer();
-        Block ClickedBlock = event.getClickedBlock();
         int two = 2;
         int one = 1;
+        int three = 3;
         int four2 = 4;
         int four = 5;
         int six = 7;
 
-        item(Material.BLAZE_POWDER, "-", "Crit Damage");
-        item(Material.STONE_BUTTON, "+", "Slots");
+        // Creating inventory + items
+        Inventory inv = Bukkit.createInventory(player, 54, ChatColor.BOLD + "Stat Upgrades");
+        if (event.getClickedBlock() != null && event.getAction() == Action.RIGHT_CLICK_BLOCK && player.getInventory().getItemInMainHand().getItemMeta() != null && !player.getInventory().getItemInMainHand().getType().equals(Material.BOOK)) {
+            for (int i = 0; i <= 5; i++) {
+                inv.setItem(two, item(Material.LADDER, "", ""));
+                inv.setItem(four, item(Material.LADDER, "", ""));
+                inv.setItem(six, item(Material.LADDER, "", ""));
+                inv.setItem(one, item(Material.PAPER, "+", "0"));
+                inv.setItem(four2, item(Material.PAPER, "+", "0"));
+                two = two + 9;
+                four = four + 9;
+                six = six + 9;
+                one = one + 9;
+                four2 = four2 + 9;
+            }
 
-    // Creating inventory + items
-    Inventory inv = Bukkit.createInventory(player, 54, ChatColor.BOLD + "Stat Upgrades");
-        for(int i = 0; i <= 5; i++) {
-        inv.setItem(two, item(Material.LADDER, "", ""));
-        inv.setItem(four, item(Material.LADDER, "", ""));
-        inv.setItem(six, item(Material.LADDER, "", ""));
-        inv.setItem(one,item(Material.PAPER, ChatColor.GRAY + "+", "0"));
-        inv.setItem(four2,item(Material.PAPER, ChatColor.GRAY + "+", "0"));
-        two = two + 9;
-        four = four + 9;
-        six = six + 9;
-        one = one + 9;
-        four2 = four2 + 9;
-    }
+            // Setting items
+            inv.setItem(0, item(Material.RED_DYE, "-", ChatColor.RED + "STR"));
+            inv.setItem(3, item(Material.BLAZE_ROD, "-", ChatColor.LIGHT_PURPLE + "Magic ATT"));
+            inv.setItem(6, item(Material.WOODEN_SWORD, "Warrior", "Click this to select Warrior"));
+            inv.setItem(8, player.getInventory().getItemInMainHand());
+            inv.setItem(9, item(Material.YELLOW_DYE, "-", ChatColor.YELLOW + "DEX"));
+            inv.setItem(12, item(Material.WOODEN_SWORD, "-", ChatColor.RED + "Weapon ATT"));
+            inv.setItem(15, item(Material.BLAZE_ROD, "Magician", "Click this to select Magician"));
+            inv.setItem(17, item(Material.WOODEN_SWORD, "Sword", ""));
+            inv.setItem(18, item(Material.BLUE_DYE, "-", ChatColor.AQUA + "LUK"));
+            inv.setItem(21, item(Material.SHIELD, "-", ChatColor.GREEN + "Defence"));
+            inv.setItem(24, item(Material.CROSSBOW, "Archer", "Click this to select Archer"));
+            inv.setItem(26, item(Material.BLAZE_ROD, "Wand", ""));
+            inv.setItem(27, item(Material.PURPLE_DYE, "-", ChatColor.LIGHT_PURPLE + "INT"));
+            inv.setItem(30, item(Material.MAGMA_CREAM, "-", ChatColor.RED + "Crit Damage"));
+            inv.setItem(35, item(Material.CROSSBOW, "Crossbow", ""));
+            inv.setItem(44, item(Material.IRON_CHESTPLATE, "Armor", ""));
+            inv.setItem(39, item(Material.BLAZE_POWDER, "-", ChatColor.YELLOW + "Crit Chance"));
+            inv.setItem(36, item(Material.STONE_BUTTON, "-", ChatColor.GRAY + "Slots"));
+            inv.setItem(48, item(Material.DANDELION, "-", "Scroll Success Chance"));
+            if (event.getClickedBlock().getType().equals(Material.FLETCHING_TABLE) && player.isOp()) {
+                player.openInventory(inv);
+            }
+        } else if(event.getClickedBlock() != null && event.getAction() == Action.RIGHT_CLICK_BLOCK && player.getInventory().getItemInMainHand().getItemMeta()!=null&&player.getInventory().getItemInMainHand().getType().equals(Material.BOOK)) {
 
-
-    // Setting items
-        inv.setItem(0,item(Material.RED_DYE, ChatColor.GRAY +"-", "STR"));
-        inv.setItem(3,item(Material.PURPLE_DYE, ChatColor.GRAY + "-", "Magic ATK"));
-        inv.setItem(6,item(Material.WOODEN_SWORD, "Warrior", "Click this to select Warrior"));
-        inv.setItem(8,item(Material.GREEN_CONCRETE, "Save", ""));
-        inv.setItem(9,item(Material.YELLOW_DYE, ChatColor.GRAY + "-", "DEX"));
-        inv.setItem(12,item(Material.WOODEN_SWORD, "+", "ATK"));
-        inv.setItem(15,item(Material.BLAZE_ROD, "Magician", "Click this to select Magician"));
-        inv.setItem(17,item(Material.WOODEN_SWORD, "Sword", ""));
-        inv.setItem(18,item(Material.BLUE_DYE, ChatColor.GRAY + "-", "LUK"));
-        inv.setItem(21,item(Material.SHIELD, "-", "DEF"));
-        inv.setItem(24,item(Material.CROSSBOW, "Archer", "Click this to select Archer"));
-        inv.setItem(26,item(Material.BLAZE_ROD, "Wand", ""));
-        inv.setItem(27,item(Material.PURPLE_DYE, ChatColor.GRAY + "-", "INT"));
-        inv.setItem(30,item(Material.MAGMA_CREAM, "-", "Crit Chance"));
-        inv.setItem(35,item(Material.CROSSBOW, "Bow", ""));
-
-        if(event.getClickedBlock() != null && event.getClickedBlock().getType() != null && event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-            if (event.getClickedBlock().getType().equals(Material.FLETCHING_TABLE)) {
-                if (player.isOp()) {
-                    player.openInventory(inv);
-
+            // Creating inventory
+            Inventory scrollInventory = Bukkit.createInventory(player, 27, ChatColor.BOLD + "Scroll Upgrade");
+            for (int i = 0; i <= 2; i++) {
+                scrollInventory.setItem(one, item(Material.PAPER, "+", "0"));
+                scrollInventory.setItem(three, item(Material.PAPER, "+", "0"));
+                scrollInventory.setItem(four, item(Material.PAPER, "+", "0"));
+                one = one + 9;
+                three = three + 9;
+                if(i < 2) {
+                    four = four + 9;
                 }
             }
-        }
-    }
-    @EventHandler
-    public void onClickEvent(InventoryClickEvent event){
-        Bukkit.broadcastMessage("Hi");
-        event.setCancelled(true);
-        ItemStack item = event.getInventory().getItem(event.getSlot());
-        if(event.getWhoClicked().getOpenInventory().getTitle().equals(ChatColor.BOLD + "Stat Upgrades")) {
+            scrollInventory.setItem(0, item(Material.RED_DYE, "-", ChatColor.RED + "STR"));
+            scrollInventory.setItem(2, item(Material.YELLOW_DYE, "-", ChatColor.YELLOW + "DEX"));
+            scrollInventory.setItem(4, item(Material.BLUE_DYE, "-", ChatColor.AQUA + "LUK"));
+            scrollInventory.setItem(9, item(Material.WOODEN_SWORD, "-", ChatColor.RED + "Weapon ATT"));
+            scrollInventory.setItem(11, item(Material.BLAZE_ROD, "-", ChatColor.LIGHT_PURPLE + "Magic ATT"));
+            scrollInventory.setItem(13, item(Material.PURPLE_DYE, "-", ChatColor.LIGHT_PURPLE + "INT"));
+            scrollInventory.setItem(18, item(Material.DANDELION, "-", "Scroll Success Chance"));
+            scrollInventory.setItem(23, item(Material.CROSSBOW, "Crossbow", "Click this to select Crossbow"));
+            scrollInventory.setItem(24, item(Material.BLAZE_ROD, "Wand", "Click this to select Wand"));
+            scrollInventory.setItem(25, item(Material.IRON_SWORD, "Sword", "Click this to select Sword"));
+            scrollInventory.setItem(26, item(Material.NETHERITE_CHESTPLATE, "Armor", "Click this to select Armor"));
+            scrollInventory.setItem(8, item(Material.BOOK, player.getInventory().getItemInMainHand().getItemMeta().getDisplayName(), player.getInventory().getItemInMainHand().getItemMeta().getLore() + ""));
+            scrollInventory.setItem(20, item(Material.SHIELD, "-", "Defence"));
 
-            if (item == null && item.getItemMeta() == null && !(item.getItemMeta().hasDisplayName())) return;
-            ItemMeta meta = item.getItemMeta();
-            List<String> lore = meta.getLore();
-
-            if (meta.getDisplayName().equals("+")) {
-                ItemStack item1 = event.getInventory().getItem(event.getSlot() - 1);
-                ItemMeta meta1 = item1.getItemMeta();
-                List<String> lore1 = meta.getLore();
-
-
-                if (item1 == null && item1.getItemMeta() == null && !item1.getItemMeta().hasDisplayName() && !item1.getItemMeta().hasLore())
-                    return;
-                if(event.getClick().isLeftClick()
-                ){
-                    lore1.set(0,Integer.valueOf(item1.getItemMeta().getLore().get(0)) + 1 + "");
-                    meta1.setLore(lore1);
-                    item1.setItemMeta(meta1);
-                } else {
-                    lore1.set(0,Integer.valueOf(item1.getItemMeta().getLore().get(0)) + 10 + "");
-                    meta1.setLore(lore);
-                    item1.setItemMeta(meta1);
-                }
-
-            } else if(meta.getDisplayName().equals("-")){
-                if(event.getClick().isLeftClick() && meta.getLore() != null) {
-                    lore.set(0, Integer.parseInt(item.getItemMeta().getLore().get(0)) - 1 + "");
-                    meta.setLore(lore);
-                    item.setItemMeta(meta);
-                } else {
-                    lore.set(0, Integer.parseInt(item.getItemMeta().getLore().get(0)) - 10 + "");
-                    meta.setLore(lore);
-                    item.setItemMeta(meta);
+            if (event.getClickedBlock() != null && event.getAction() == Action.RIGHT_CLICK_BLOCK && player.getInventory().getItemInMainHand().getType().equals(Material.BOOK)) {
+                if (event.getClickedBlock().getType().equals(Material.FLETCHING_TABLE) && player.isOp()) {
+                    player.openInventory(scrollInventory);
                 }
             }
         }

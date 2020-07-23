@@ -11,5 +11,6 @@ public final class KipaEXT extends JavaPlugin {
         // Plugin startup logic
         System.out.println("KipaEXT by RiesPanda has been enabled!");
         getServer().getPluginManager().registerEvents(new OpenGUI(), this);
+        getServer().getPluginManager().registerEvents(new onClick(), this);
     }
 }
